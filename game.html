@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Click Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        #game-container {
+            text-align: center;
+        }
+
+        #game-area {
+            width: 400px;
+            height: 300px;
+            border: 2px solid #333;
+            background-color: #fff;
+            position: relative; /* Important for positioning the target */
+            cursor: crosshair;
+            margin-bottom: 20px;
+        }
+
+        #target {
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            border-radius: 50%; /* Makes it a circle */
+            position: absolute; /* Positioned relative to game-area */
+            cursor: pointer;
+            display: none; /* Hidden initially */
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            transition: background-color 0.1s ease; /* Smooth color change on click */
+        }
+
+        #target:active {
+            background-color: darkred;
+        }
+
+        #score-board {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="game-container">
+        <h1>Click the Target!</h1>
+        <div id="score-board">
+            Score: <span id="score">0</span> | Time Left: <span id="time-left">20</span>
+        </div>
+        <div id="game-area">
+            <div id="target"></div>
+        </div>
+        <button id="start-button">Start Game</button>
+        <p id="game-over-message" style="color: red; font-weight: bold;"></p>
+    </div>
+
+    <script>
+        const gameArea = document.getElementById('game-area');
+        const target = document.getElementById('target');
+        const scoreDisplay = document.getElementById('score');
+        const timeLeftDisplay = document.getElementById('time-left');
+        const startButton = document.getElementById('start-button');
+        const gameOverMessage = document.getElementById('game-over-message');
+
+        let score = 0;
+        let timeLeft = 20; // Game duration in seconds
+        let gameInterval;
+        let gameActive = false;
+        let targetTimeout; // To move target if not clicked quickly enough
+
+        function getRandomPosition() {
+            // Ensure target stays fully within the game area
+            const gameAreaWidth = gameArea.clientWidth;
+            const gameAreaHeight = gameArea.clientHeight;
+            const targetWidth = target.offsetWidth;
+            const targetHeight = target.offsetHeight;
+
+            const x = Math.random() * (gameAreaWidth - targetWidth);
+            const y = Math.random() * (gameAreaHeight - targetHeight);
+            return { x, y };
+        }
+
+        function moveTarget() {
+            if (!gameActive) return;
+
+            const pos = getRandomPosition();
+            target.style.left = pos.x + 'px';
+            target.style.top = pos.y + 'px';
+            target.style.display = 'block';
+
+            // Optional: Move target automatically if not clicked within a certain time
+            clearTimeout(targetTimeout); // Clear previous timeout
+            targetTimeout = setTimeout(moveTarget, 2000); // Move after 2 seconds if not clicked
+        }
+
+        function updateTimer() {
+            timeLeft--;
+            timeLeftDisplay.textContent = timeLeft;
+            if (timeLeft <= 0) {
+                endGame();
+            }
+        }
+
+        function startGame() {
+            score = 0;
+            timeLeft = 20;
+            gameActive = true;
+
+            scoreDisplay.textContent = score;
+            timeLeftDisplay.textContent = timeLeft;
+            gameOverMessage.textContent = '';
+            startButton.disabled = true;
+            target.style.display = 'block'; // Show target initially
+
+            moveTarget();
+            gameInterval = setInterval(updateTimer, 1000);
+        }
+
+        function endGame() {
+            gameActive = false;
+            clearInterval(gameInterval);
+            clearTimeout(targetTimeout); // Clear auto-move timeout
+            target.style.display = 'none';
+            startButton.disabled = false;
+            startButton.textContent = 'Play Again?';
+            gameOverMessage.textContent = `Game Over! Your final score: ${score}`;
+        }
+
+        target.addEventListener('click', () => {
+            if (!gameActive) return;
+
+            score++;
+            scoreDisplay.textContent = score;
+            moveTarget(); // Move target immediately after a successful click
+        });
+
+        startButton.addEventListener('click', startGame);
+
+    </script>
+
+</body>
+</html>

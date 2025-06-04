@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Projects - Mufaddal Hirani</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="Explore projects by Mufaddal Hirani, showcasing his skills in web development and technology.">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="nav-logo">Mufaddal Hirani</a>
+            <div class="nav-controls">
+                <button id="darkModeToggle" aria-label="Toggle dark mode" aria-pressed="false">🌙</button>
+                <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="main-nav-menu">☰</button>
+            </div>
+            <ul id="main-nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="skills.html">Skills</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="my-projects" class="projects-section content-page-section">
+    <div class="container">
+        <h2>My Projects</h2>
+        <p class="section-intro">Here are some of the projects I've worked on. (More details and projects will be added soon!)</p>
+        <div class="project-grid">
+            <div class="project-card">
+                <img src="images/htmlgame.png" alt="Web Game Screenshot" aria-label="Project 1 sample image">
+                <h3>Project Title 1</h3>
+                <p>A mini web game built with HTML, CSS, and vanilla JavaScript, demonstrating fundamental client-side game logic. Features include a dynamic clickable target, scoring, and a countdown timer.</p>
+                <p class="technologies"><strong>Technologies:</strong> HTML, CSS, JavaScript</p>
+                <div class="project-links">
+                    <a href="game.html" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" aria-label="View Project 1 Demo (opens in new tab)">Demo</a>
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" aria-label="View Project 1 Code (opens in new tab)">Code</a>
+                </div>
+            </div>
+                    <div class="project-card">
+                        <div class="project-image-placeholder" aria-label="Project 2 image placeholder"></div>
+                        <h3>Project Title 2</h3>
+                        <p>Another cool project I worked on. This one might have involved back-end logic or a specific API integration. Describe the challenges and outcomes.</p>
+                        <p class="technologies"><strong>Technologies:</strong> React, Node.js, API Integration</p>
+                        <div class="project-links">
+                             <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" aria-label="View Project 2 Demo (opens in new tab)">Demo</a>
+                             <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" aria-label="View Project 2 Code (opens in new tab)">Code</a>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-image-placeholder" aria-label="Project 3 image placeholder"></div>
+                        <h3>Project Title 3 (e.g., Early Innovation)</h3>
+                        <p>This could be the "Automatic Parking Light System" from 8th grade. Describe its concept, how it worked, and what you learned from the experience.</p>
+                        <p class="technologies"><strong>Skills Demonstrated:</strong> Innovation, Basic Electronics, Problem Solving</p>
+                        <div class="project-links">
+                             <span class="btn btn-secondary disabled">N/A</span>
+                             <span class="btn btn-secondary disabled">N/A</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="current-year"></span> Mufaddal Hirani. All rights reserved.</p>
+             <p>Location: Vasai, Maharashtra, India</p>
+        </div>
+    </footer>
+
+    <button id="backToTopBtn" aria-label="Back to top" title="Go to top">↑</button>
+    <script src="script.js"></script>
+</body>
+</html>
